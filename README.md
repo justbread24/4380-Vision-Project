@@ -17,8 +17,24 @@ Data:
   - Train Shape: (4610, 10)
   - Test Shape: (204, 10) 
 - Instances:
+  - Total data points: Around 2,892 images of hand gestures 
+  - Training: 2,520 images
+  - Validation: 372 images
+  - 80% training and 20% validation
 
   **Preprocessing and Clean-up**
+  The dataset consists of RGB images associates with labels rock, paper, or scissors. The lavels and image file paths are maintained in CSV files, which requires a PyTorchh Dataset class to map filenames to labels because the data is not arranged in class subfolders.
+  The images themselves are stored in a common directory, which requires careful management to ensure the CSV files entries match actual image files. Corrupted or missing images where identified and removed to avoid runtime errors. The dataset is split into training and validation sets using stratified splitting to maintain balanced class proportions in both subsets.
+Image Transformation:
+- Images are resized to match each model's expected input dimensions
+  - 224×224 pixels for ResNet50 and EfficientNet-B0
+  - 299×299 pixels for InceptionV3
+- Random Horizontal Flip Augmentation
+
+Data Loader Setup:
+- DataLoaders batch and shuffle the training data (shuffle=True) to provide randomness each epoch, aiding generalization.
+- Validation DataLoaders do not shuffle to maintain consistency.
+- Multiple worker processes (num_workers=4 or similar) speed up image loading and transformation
 
   **Data Visualization**
 The graphs below show the ROC curves of the three models used for the classification project including ResNet50, EfficientNet (EfficientNet-B0), and InceptionV3.
