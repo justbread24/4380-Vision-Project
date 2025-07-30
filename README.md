@@ -4,7 +4,11 @@ This repository aims at attempting to use transfer learning models to classify i
 https://www.kaggle.com/datasets/adilshamim8/rock-paper-scissors
 
 ## Overview 
-The 
+The assignment for this project is to categorize hand gesture images into a rock, paper, or scissors class. The problem is to create models that can effectively differentiate between these classes based on a moderately large dataset of labeled RGB images. Because the dataset is relatively small and we require good generalization, the project takes advantage of transfer learning with state-of-the-art convolutional neural networks that have been pretrained on ImageNet.
+
+Our method casts this as a multi-class image classification task, with three state-of-the-art deep learning architectures—ResNet50, EfficientNet-B0, and InceptionV3—as the backbone models. Each is fine-tuned by swapping out its last classifier to have three classes for the task. We perform minimal data augmentation (random horizontal flip) on the training images to enhance generalization without adding too much variability. The models are developed and assessed on stratified splits of the data, with learning curves and ROC analyses for monitoring the performance.
+
+The best-performing models achieved validation accuracies in the order of around 52%, indicating mediocre performance with respect to the classification task. These results show that transfer learning, combined with selective augmentation, offers a start for hand gesture recognition in scenarios where data is limited.
 
 ## Summary of Workdone
 ### Data
@@ -23,6 +27,7 @@ Data:
   - 80% training and 20% validation
 
   **Preprocessing and Clean-up**
+  
   The dataset consists of RGB images associates with labels rock, paper, or scissors. The lavels and image file paths are maintained in CSV files, which requires a PyTorchh Dataset class to map filenames to labels because the data is not arranged in class subfolders.
   The images themselves are stored in a common directory, which requires careful management to ensure the CSV files entries match actual image files. Corrupted or missing images where identified and removed to avoid runtime errors. The dataset is split into training and validation sets using stratified splitting to maintain balanced class proportions in both subsets.
 Image Transformation:
@@ -37,6 +42,7 @@ Data Loader Setup:
 - Multiple worker processes (num_workers=4 or similar) speed up image loading and transformation
 
   **Data Visualization**
+  
 The graphs below show the ROC curves of the three models used for the classification project including ResNet50, EfficientNet (EfficientNet-B0), and InceptionV3.
 
 <img width="1189" height="490" alt="download" src="https://github.com/user-attachments/assets/af150b3b-0f5a-49c6-ab61-f945c1a73bda" />
@@ -102,6 +108,58 @@ ADD GRAPHS HERE
 
 
 **Performance Comparison**
+
 As we can see from the graph below, the different augmentation techniques used show that applying Random Horizontal Flip augmentation improves AUC significantly, especially for Rock (0.66) conpared to the baseline with no augmentation (0.52). This suggests that the RHF helps the model generalize better, meanwhile Random Rotation and Random Zoom have mixed and lower effects. With some AUC's that are lower than the baseline, which indicate that these augmentations may not suit this task well. 
 
 <img width="857" height="701" alt="download" src="https://github.com/user-attachments/assets/b30d6f7f-11f5-4145-8e34-3f03bb3f1bbc" /> 
+
+**Conclusions**
+These models don't paticularly achieve high validation accuracy since they are below 52% accuracy, which suggests that more tuning and training is needed. However, the second model (EfficientNet-B0) achieves the lowest training loss, but doesn't improve accuracy as much, which is a sign of overfitting. 
+
+**Future Work**
+To build on current results, there are several options that can be explored further:
+- Fine-tuning deeper layers: Gradually unfreeze and fine-tune more layers beyond the classifier head to potentially gain better feature adaptation to the specific task.
+- Additional and more varied augmentations: Incorporate augmentations such as random rotations, color jitter, random cropping, or mixup to increase dataset diversity and robustness.
+- Hyperparameter optimization: Systematic tuning of learning rates, optimizers, batch sizes, and regularization techniques like dropout or weight decay.
+
+### How to reproduce results
+
+**Reproducing Training**
+- Clone the repository and ensure project dependencies are installed (see Software Setup below).
+- Prepare dataset: Place your images in a directory and obtain CSV files listing image filenames and respective class labels.
+- Split your dataset into training and validation sets using stratified splitting (example code provided).
+- Run the training scripts for each model (ResNet50, EfficientNet-B0, InceptionV3), which include loading pretrained weights, setting up data loaders with transforms (including random horizontal flip), training loops, and evaluation.
+- The scripts save the best checkpoint models alongside learning curves and ROC curve plots for performance visualization.
+
+**Software Setup**
+Required Packages
+- torch (PyTorch)
+- torchvision
+- efficientnet_pytorch (for EfficientNet models)
+- numpy
+- pandas
+- Pillow
+- scikit-learn
+- matplotlib
+
+  **Training**
+How to:
+- Prepare train and validation datasets as described.
+- Run the training script for your chosen model.
+- The script handles data loading, applies transforms (random horizontal flip on training set), loads pretrained weights, replaces classifier head, freezes backbone, and trains classifier.
+
+**Training Details**
+- Optimizer: Adam with default lr=0.001.
+- Loss: CrossEntropyLoss.
+- Batch size: 32.
+- Number of epochs: 20 (adjustable).
+- Validation accuracy and loss tracked each epoch.
+- Best model checkpoint saved automatically.
+- Learning curves plotted post training.
+
+**Performance Evaluation**
+- Post training, run the evaluation script or section that loads validation data and saved model checkpoints.
+- Calculate standard metrics including accuracy, per-class precision/recall if desired.
+- Generate and visualize ROC curves for each model on validation data to compare performance comprehensively.
+- ROC curve plotting code supports multi-class one-vs-rest approach for detailed assessment.
+- Use saved plots and metrics to compare and select the best model for deployment or further development.
