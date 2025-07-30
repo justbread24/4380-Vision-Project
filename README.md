@@ -11,15 +11,29 @@ The
 
 Data:
 - Type:
-  - Input:
-  - Input:
+  - Input: RGB images (originally 1000x1000 pixel JPEGS, resized to 224x224 for ResNet50 and EfficientNet, or 299x299 for InceptionV3. 
+  - Additional Input: CSV files containing iamge filenames mapped to their corresponding labels/classes (rock, paper, scissors)
 - Size:
+  - Train Shape: (4610, 10)
+  - Test Shape: (204, 10) 
 - Instances:
 
   **Preprocessing and Clean-up**
 
   **Data Visualization**
+The graphs below show the ROC curves of the three models used for the classification project including ResNet50, EfficientNet (EfficientNet-B0), and InceptionV3.
 
+<img width="1189" height="490" alt="download" src="https://github.com/user-attachments/assets/af150b3b-0f5a-49c6-ab61-f945c1a73bda" />
+
+Based on the epochs and the visualization for ResNet50 we can see that the model learns over time but validation accuracy remains moderate around 45-50%, which suggests limited generalization. The loss lowering without a strong, consistent improvement in accuracy couold indicare that the model improves confidence in training data but does not fully translate to validation gains. 
+
+<img width="1189" height="490" alt="download" src="https://github.com/user-attachments/assets/9019a701-4549-42ea-9cfb-63256d29dc2c" />
+
+As we can see the training loss decreases nicely, the validation accuracy does not improve much beyong low fifty percents and stabilizes around 46-50%. This could suggest overfitting or a celingt on the model's ability to generalize for this dataset. 
+
+<img width="1189" height="490" alt="download" src="https://github.com/user-attachments/assets/351ef906-29c9-4402-b3a5-39aeb3d1768e" />
+
+The InceptionV3 model, similar to ResNet50, suggests steady learning with reasonable reduction in loss and improvement in accuracy. The validation accuracy near 50% shows moderate generalization, but there is still room for improvements. 
 
   ### Problem Formulation
 **Input/Output:**
