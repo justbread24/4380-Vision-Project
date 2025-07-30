@@ -69,3 +69,9 @@ ADD GRAPHS HERE
 - InceptionV3's updated torchvision API required handling of auxiliary logits output with combined loss for stable training.
 - Missing validation folder caused FileNotFoundError; resolved by adapting code to DataFrame-based loading.
 - Incorporating learning curves and ROC evaluation required addition of tracking lists and sklearn code, integrated post-training.
+
+
+**Performance Comparison**
+As we can see from the graph below, the different augmentation techniques used show that applying Random Horizontal Flip augmentation improves AUC significantly, especially for Rock (0.66) conpared to the baseline with no augmentation (0.52). This suggests that the RHF helps the model generalize better, meanwhile Random Rotation and Random Zoom have mixed and lower effects. With some AUC's that are lower than the baseline, which indicate that these augmentations may not suit this task well. 
+
+<img width="857" height="701" alt="download" src="https://github.com/user-attachments/assets/b30d6f7f-11f5-4145-8e34-3f03bb3f1bbc" /> 
