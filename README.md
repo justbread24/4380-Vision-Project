@@ -116,8 +116,10 @@ As we can see from the graph below, the different augmentation techniques used s
 
 
 **Conclusions**
+
 These models don't paticularly achieve high validation accuracy since they are 75% accuracy, which suggests that more tuning and training is needed.
 **Future Work**
+
 To build on current results, there are several options that can be explored further:
 - Fine-tuning deeper layers: Gradually unfreeze and fine-tune more layers beyond the classifier head to potentially gain better feature adaptation to the specific task.
 - Additional and more varied augmentations: Incorporate augmentations such as random rotations, color jitter, random cropping, or mixup to increase dataset diversity and robustness.
@@ -126,6 +128,7 @@ To build on current results, there are several options that can be explored furt
 ### How to reproduce results
 
 **Reproducing Training**
+
 - Clone the repository and ensure project dependencies are installed (see Software Setup below).
 - Prepare dataset: Place your images in a directory and obtain CSV files listing image filenames and respective class labels.
 - Split your dataset into training and validation sets using stratified splitting (example code provided).
