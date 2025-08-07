@@ -111,9 +111,8 @@ As we can see from the graph below, the different augmentation techniques used s
 
 <img width="857" height="701" alt="download" src="https://github.com/user-attachments/assets/b30d6f7f-11f5-4145-8e34-3f03bb3f1bbc" /> 
 
-<img width="389" height="411" alt="download" src="https://github.com/user-attachments/assets/5302600a-3d43-4d28-8f4b-22ac17baabe8" />
-<img width="389" height="411" alt="download" src="https://github.com/user-attachments/assets/3e4c7d71-a2a9-4bc7-bfff-f224713067c8" />
-<img width="389" height="411" alt="download" src="https://github.com/user-attachments/assets/633b8bef-99eb-4d48-8b1f-14a4a5298ca8" />
+<img width="638" height="715" alt="download" src="https://github.com/user-attachments/assets/ab386e43-dec7-42b3-a41c-fe61c44bf15e" />
+
 
 
 **Conclusions**
