@@ -8,7 +8,7 @@ The assignment for this project is to categorize hand gesture images into a rock
 
 Our method casts this as a multi-class image classification task, with three state-of-the-art deep learning architectures—ResNet50, EfficientNet-B0, and InceptionV3—as the backbone models. Each is fine-tuned by swapping out its last classifier to have three classes for the task. We perform minimal data augmentation (random horizontal flip) on the training images to enhance generalization without adding too much variability. The models are developed and assessed on stratified splits of the data, with learning curves and ROC analyses for monitoring the performance.
 
-The best-performing models achieved validation accuracies in the order of around 52%, indicating mediocre performance with respect to the classification task. These results show that transfer learning, combined with selective augmentation, offers a start for hand gesture recognition in scenarios where data is limited.
+The best-performing models achieved validation accuracies in the order of around 75%, indicating an average performance with respect to the classification task. These results show that transfer learning, combined with selective augmentation, offers a start for hand gesture recognition in scenarios where data is limited.
 
 ## Summary of Workdone
 ### Data
@@ -97,8 +97,6 @@ These models were chosen for their:
 - Validation accuracy improved to plateau, showing good generalization without overfitting.
 - Learning curves plotted with Matplotlib demonstrated model progress visually.
 
-ADD GRAPHS HERE
-
 **Difficulties and resolutions**
 - Managing dataset splits without explicit validation set was solved by stratified splitting of original training data with scikit-learn.
 - ImageFolder could not be used due to data stored in CSVs; custom Dataset class allowed flexible loading from CSV filename-label mapping.
@@ -113,9 +111,13 @@ As we can see from the graph below, the different augmentation techniques used s
 
 <img width="857" height="701" alt="download" src="https://github.com/user-attachments/assets/b30d6f7f-11f5-4145-8e34-3f03bb3f1bbc" /> 
 
-**Conclusions**
-These models don't paticularly achieve high validation accuracy since they are below 52% accuracy, which suggests that more tuning and training is needed. However, the second model (EfficientNet-B0) achieves the lowest training loss, but doesn't improve accuracy as much, which is a sign of overfitting. 
+<img width="389" height="411" alt="download" src="https://github.com/user-attachments/assets/5302600a-3d43-4d28-8f4b-22ac17baabe8" />
+<img width="389" height="411" alt="download" src="https://github.com/user-attachments/assets/3e4c7d71-a2a9-4bc7-bfff-f224713067c8" />
+<img width="389" height="411" alt="download" src="https://github.com/user-attachments/assets/633b8bef-99eb-4d48-8b1f-14a4a5298ca8" />
 
+
+**Conclusions**
+These models don't paticularly achieve high validation accuracy since they are 75% accuracy, which suggests that more tuning and training is needed.
 **Future Work**
 To build on current results, there are several options that can be explored further:
 - Fine-tuning deeper layers: Gradually unfreeze and fine-tune more layers beyond the classifier head to potentially gain better feature adaptation to the specific task.
